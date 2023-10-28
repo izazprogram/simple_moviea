@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_moviea/colors.dart';
+import 'package:simple_moviea/widgeta/moviesslider.dart';
+import 'package:simple_moviea/widgeta/trendingslider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,53 +15,52 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Image.asset("assets/flutflix.png",
-        fit: BoxFit.cover,
-        height: 30,
+        title: Image.asset(
+          "assets/flutflix.png",
+          fit: BoxFit.cover,
+          height: 30,
           filterQuality: FilterQuality.high,
         ),
         centerTitle: true,
       ),
-
-body: SingleChildScrollView(
-  physics: const BouncingScrollPhysics(),
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text("Trending Movies"),
-     SizedBox(height: 10,),
-     SizedBox(
-      width: double.infinity,
-       child:CarouselSlider.builder(
-           itemCount: 10,
-           options: CarouselOptions(
-             aspectRatio: 16/9,
-             height: 300,autoPlay: true,
-             viewportFraction: 0.55,
-             enlargeCenterPage: true,
-             pageSnapping: true,
-             autoPlayCurve: Curves.fastOutSlowIn,
-             autoPlayAnimationDuration: const Duration(seconds: 1),
-           ),
-           itemBuilder: (context,itemIndex,pageViewIndex) {
-             return ClipRRect(
-               borderRadius: BorderRadius.circular(12),
-               child: Container(
-                 height: 300,
-                 width: 200,
-                 color: Colors.amber,
-               ),
-             );
-           }
-           ),
-     )
-    ],
-  ),
-),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Trending Movies",
+              style: GoogleFonts.aBeeZee(fontSize: 25),
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            const TrendingSlider(),
+            const SizedBox(height: 32),
+            Text(
+              "Top Rated Movies",
+              style: GoogleFonts.aBeeZee(fontSize: 25),
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            const MoviesSlider(),
+            const SizedBox(height: 32),
+            Text(
+              "Upcoming Rated Movies",
+              style: GoogleFonts.aBeeZee(fontSize: 25),
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            const MoviesSlider(),
+          ],
+        ),
+      ),
     );
   }
 }
